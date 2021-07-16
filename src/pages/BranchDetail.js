@@ -5,15 +5,27 @@ import useFetchRow from "../hooks/useFetchRow";
 import CategoryCard from "../components/CategoryCard";
 import { Link } from "react-router-dom";
 
+import useFetchRelationships from "../hooks/useFetchRelationships";
+
 export default function BranchDetail() {
   const { BranchId } = useParams();
   const [branch, branchStatus] = useFetchRow("allBranch", BranchId);
   const [categories, categoriesStatus] = useFetchTable("allCategory", {});
 
-  if (branchStatus === "success" && categoriesStatus === "success") {
+  const [branchMenus] = useFetchRelationships(
+    "allBranch",
+    BranchId,
+    "menu",
+    {}
+  );
+
+  if (
+    branchMenus &&
+    branchStatus === "success" &&
+    categoriesStatus === "success"
+  ) {
     const { name } = branch;
     const { displayField: city } = branch.city;
-    const { nodes: branchMenus } = branch.menu;
 
     return (
       <>

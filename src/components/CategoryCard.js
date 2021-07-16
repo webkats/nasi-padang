@@ -9,7 +9,7 @@ export default function CategoryCard({ category, branchMenus }) {
     const filteredMenus = menus.filter((menu) => {
       let isBranchMenu = false;
       branchMenus.forEach((branchMenu) => {
-        if (menu.name === branchMenu.displayField) isBranchMenu = true;
+        if (menu.name === branchMenu.name) isBranchMenu = true;
       });
       return isBranchMenu;
     });
@@ -17,10 +17,6 @@ export default function CategoryCard({ category, branchMenus }) {
     const filteredCategoryMenus = filteredMenus.filter((menu) => {
       return menu.category.displayField === category.name;
     });
-
-    console.log(branchMenus, "branchMenus");
-    console.log(filteredMenus, "filteredMenus", category.name);
-    console.log(filteredCategoryMenus, "filteredCategoryMenus", category.name);
 
     return (
       <div className="col-12 border p-3 g-3">
