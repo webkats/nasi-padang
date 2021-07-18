@@ -6,10 +6,20 @@ export default function Home() {
   const [branches] = useFetchTable("allBranch", {});
 
   return (
-    <div className="row g-2">
-      {branches.map((branch) => {
-        return <BranchCard key={branch.id} branch={branch} />;
-      })}
-    </div>
+    <>
+      <div className="row mb-3">
+        <div className="col-12 text-center">
+          <h1>Rumah Makan - Nasi Padang</h1>
+        </div>
+      </div>
+      <div className="row g-2">
+        <div className="col-12">
+          <h4>Cabang:</h4>
+        </div>
+        {branches.map((branch) => {
+          return <BranchCard key={branch.id} branch={branch} />;
+        })}
+      </div>
+    </>
   );
 }
