@@ -6,7 +6,7 @@ export default function Home() {
   const [branches] = useFetchTable("allBranch", {});
 
   return (
-    <div className="row">
+    <div className="row g-2">
       {branches.map((branch) => {
         return <BranchCard key={branch.id} branch={branch} />;
       })}

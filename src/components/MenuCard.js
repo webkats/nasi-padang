@@ -5,7 +5,7 @@ export default function MenuCard({ menu }) {
   const { name, price, imageUrl } = menu;
 
   return (
-    <div className="col-3 g-3">
+    <div className="col-3">
       <div className="card">
         <img
           src={imageUrl || placeholderImage}

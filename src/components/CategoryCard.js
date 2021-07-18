@@ -19,13 +19,13 @@ export default function CategoryCard({ category, branchMenus }) {
     });
 
     return (
-      <div className="col-12 border p-3 g-3">
+      <div className="col-12 border p-3">
         <div className="row mb-3">
           <div className="col-12">
             <h3>{category.name}</h3>
           </div>
         </div>
-        <div className="row">
+        <div className="row g-3">
           {filteredCategoryMenus.length ? (
             filteredCategoryMenus.map((menu) => {
               return <MenuCard key={menu.id} menu={menu} />;

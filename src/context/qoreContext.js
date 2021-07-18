@@ -3,7 +3,12 @@ import createQoreContext from "@feedloop/qore-react";
 import config from "./qore.config.json";
 import schema from "./qore.schema.json";
 
-const client = new QoreClient(config);
+import cookies from "js-cookie";
+
+const client = new QoreClient({
+  ...config,
+  getToken: () => cookies.get("token"),
+});
 client.init(schema);
 
 const qoreContext = createQoreContext(client);

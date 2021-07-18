@@ -35,11 +35,14 @@ export default function BranchDetail() {
               Branch {name}, {city}
             </h3>
             <Link to="/">
-              <h5>Back to home</h5>
+              <h5>back to home</h5>
+            </Link>
+            <Link to={`/branches/${BranchId}/edit-menu`}>
+              <h5>add and remove menu</h5>
             </Link>
           </div>
         </div>
-        <div className="row">
+        <div className="row g-2">
           {categories.map((category) => {
             return (
               <CategoryCard

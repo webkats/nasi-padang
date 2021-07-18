@@ -6,7 +6,7 @@ export default function BranchCard({ branch }) {
   const { displayField: city } = branch.city;
 
   return (
-    <div className="col-3 g-2">
+    <div className="col-3">
       <div className="card">
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
