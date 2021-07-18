@@ -7,6 +7,7 @@ export default function GlobalState({ children }) {
   const initialState = {
     isShowModal: false,
     isLoggedIn: false,
+    isShowSidebar: true,
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
