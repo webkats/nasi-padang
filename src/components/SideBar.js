@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import AdminLoginModal from "./AdminLoginModal";
+import Modal from "./Modal";
+import AdminLoginForm from "./AdminLoginForm";
 
 export default function SideBar() {
   const [showModal, setShowModal] = useState(false);
@@ -31,11 +32,16 @@ export default function SideBar() {
         </button>
       )}
 
-      <AdminLoginModal
+      <Modal
         showModal={showModal}
         setShowModal={setShowModal}
         setIsLoggedIn={setIsLoggedIn}
-      />
+      >
+        <AdminLoginForm
+          setShowModal={setShowModal}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+      </Modal>
     </div>
   );
 }

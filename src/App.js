@@ -5,32 +5,36 @@ import BranchDetail from "./pages/BranchDetail";
 import EditMenu from "./pages/EditMenu";
 import SideBar from "./components/SideBar";
 
+import GlobalState from "./context/GlobalState";
+
 export default function App() {
   return (
-    <Router>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-2 vh-100 position-fixed border py-3">
-            <SideBar />
-          </div>
-          <div className="col-10 offset-2 my-3">
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/branches/:BranchId">
-                <BranchDetail />
-              </Route>
-              <Route exact path="/branches/:BranchId/edit-menu">
-                <EditMenu />
-              </Route>
-              <Route exact path="*">
-                <div>PAGE NOT FOUND</div>
-              </Route>
-            </Switch>
+    <GlobalState>
+      <Router>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-2 vh-100 position-fixed border py-3">
+              <SideBar />
+            </div>
+            <div className="col-10 offset-2 my-3">
+              <Switch>
+                <Route exact path="/">
+                  <Home />
+                </Route>
+                <Route exact path="/branches/:BranchId">
+                  <BranchDetail />
+                </Route>
+                <Route exact path="/branches/:BranchId/edit-menu">
+                  <EditMenu />
+                </Route>
+                <Route exact path="*">
+                  <div>PAGE NOT FOUND</div>
+                </Route>
+              </Switch>
+            </div>
           </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </GlobalState>
   );
 }
