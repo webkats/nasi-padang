@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useContext } from "react";
 import Modal from "./Modal";
 import AdminLoginForm from "./AdminLoginForm";
 
+import GlobalContext from "../context/globalContext";
+import { setLogin } from "../context/globalActions";
+
 export default function SideBar() {
   const [showModal, setShowModal] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    if (localStorage.isLoggedIn === "true") setIsLoggedIn(true);
-  }, []);
-
-  const handleToggleModal = () => setShowModal(!showModal);
+  const [state, dispatch] = useContext(GlobalContext);
+  const { isLoggedIn } = state;
 
   const handleLogout = () => {
     localStorage.isLoggedIn = false;
-    setIsLoggedIn(false);
+    dispatch(setLogin(false));
   };
 
   return (
@@ -22,7 +20,7 @@ export default function SideBar() {
       {!isLoggedIn ? (
         <button
           className="btn btn-primary w-100 p-2"
-          onClick={handleToggleModal}
+          onClick={() => setShowModal(true)}
         >
           Admin Login
         </button>
@@ -32,15 +30,8 @@ export default function SideBar() {
         </button>
       )}
 
-      <Modal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        setIsLoggedIn={setIsLoggedIn}
-      >
-        <AdminLoginForm
-          setShowModal={setShowModal}
-          setIsLoggedIn={setIsLoggedIn}
-        />
+      <Modal showModal={showModal} setShowModal={setShowModal}>
+        <AdminLoginForm setShowModal={setShowModal} />
       </Modal>
     </div>
   );

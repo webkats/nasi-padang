@@ -5,7 +5,7 @@ import qs from "query-string";
 export default function useFetchRelationships(
   slug,
   RowId,
-  target,
+  relationTarget,
   { limit = 48, offset = "0", sort = "asc" }
 ) {
   const [data, setData] = useState(null);
@@ -22,7 +22,7 @@ export default function useFetchRelationships(
     const queryParams = qs.stringify({ limit, offset, sort });
 
     const { data: result } = await axios({
-      url: `${baseUrl}/${slug}/rows/${RowId}/${target}?${queryParams}`,
+      url: `${baseUrl}/${slug}/rows/${RowId}/${relationTarget}?${queryParams}`,
     });
 
     setData(result.nodes);

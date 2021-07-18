@@ -1,6 +1,7 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import GlobalContext from "./globalContext";
 import reducer from "./globalReducer";
+import { setLogin } from "./globalActions";
 
 export default function GlobalState({ children }) {
   const initialState = {
@@ -9,6 +10,10 @@ export default function GlobalState({ children }) {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    if (localStorage.isLoggedIn === "true") dispatch(setLogin(true));
+  }, []);
 
   return (
     <GlobalContext.Provider value={[state, dispatch]}>

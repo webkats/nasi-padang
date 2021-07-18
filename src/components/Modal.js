@@ -2,12 +2,7 @@ import React from "react";
 import { createPortal } from "react-dom";
 import "../assets/css/modal.css";
 
-export default function Modal({
-  children,
-  showModal,
-  setShowModal,
-  setIsLoggedIn,
-}) {
+export default function Modal({ children, showModal, setShowModal }) {
   if (showModal) {
     return createPortal(
       <div className="c-modal" onClick={() => setShowModal(false)}>

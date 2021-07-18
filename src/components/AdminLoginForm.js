@@ -1,8 +1,12 @@
-import React, { useState } from "react";
-import useQoreAuthentication from "../hooks/useQoreAuthentication";
+import React, { useContext, useState } from "react";
+// import useQoreAuthentication from "../hooks/useQoreAuthentication";
 
-export default function AdminLoginForm({ setIsLoggedIn, setShowModal }) {
-  const { handleLogin } = useQoreAuthentication();
+import GlobalContext from "../context/globalContext";
+import { setLogin } from "../context/globalActions";
+
+export default function AdminLoginForm({ setShowModal }) {
+  // const { handleLogin } = useQoreAuthentication();
+  const [, dispatch] = useContext(GlobalContext);
 
   const [input, setInput] = useState({
     email: "",
@@ -17,11 +21,12 @@ export default function AdminLoginForm({ setIsLoggedIn, setShowModal }) {
     });
   };
 
+  // FIXME:
   const handleSubmit = (event) => {
     event.preventDefault();
     // handleLogin(input.email, input.password);
     localStorage.isLoggedIn = true;
-    setIsLoggedIn(true);
+    dispatch(setLogin(true));
     setShowModal(false);
   };
 
