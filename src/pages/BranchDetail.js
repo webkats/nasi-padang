@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import useFetchTable from "../hooks/useFetchTable";
 import useFetchRow from "../hooks/useFetchRow";
 import CategoryCard from "../components/CategoryCard";
 import { Link } from "react-router-dom";
-
 import useFetchRelationships from "../hooks/useFetchRelationships";
+import GlobalContext from "../context/globalContext";
 
 export default function BranchDetail() {
   const { BranchId } = useParams();
+  const [{ isLoggedIn }] = useContext(GlobalContext);
+
   const [branch, branchStatus] = useFetchRow("allBranch", BranchId);
   const [categories, categoriesStatus] = useFetchTable("allCategory", {});
 
@@ -37,9 +39,11 @@ export default function BranchDetail() {
             <Link to="/">
               <h5>back to home</h5>
             </Link>
-            <Link to={`/branches/${BranchId}/edit-menu`}>
-              <h5>add and remove menu</h5>
-            </Link>
+            {isLoggedIn ? (
+              <Link to={`/branches/${BranchId}/edit-menu`}>
+                <h5>add and remove menu</h5>
+              </Link>
+            ) : null}
           </div>
         </div>
         <div className="row g-2">

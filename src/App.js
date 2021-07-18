@@ -4,8 +4,8 @@ import Home from "./pages/Home";
 import BranchDetail from "./pages/BranchDetail";
 import EditMenu from "./pages/EditMenu";
 import SideBar from "./components/SideBar";
-
 import GlobalState from "./context/GlobalState";
+import PrivateRoute from "./components/PrivateRoute";
 
 export default function App() {
   return (
@@ -24,9 +24,9 @@ export default function App() {
                 <Route exact path="/branches/:BranchId">
                   <BranchDetail />
                 </Route>
-                <Route exact path="/branches/:BranchId/edit-menu">
+                <PrivateRoute exact path="/branches/:BranchId/edit-menu">
                   <EditMenu />
-                </Route>
+                </PrivateRoute>
                 <Route exact path="*">
                   <div>PAGE NOT FOUND</div>
                 </Route>
