@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import GlobalContext from "../context/globalContext";
 import { setShowSidebar } from "../context/globalActions";
+import NavDrawer from "../assets/nav-drawer.svg";
 
 export default function Appbar() {
   const [{ isShowSidebar }, dispatch] = useContext(GlobalContext);
@@ -11,13 +12,13 @@ export default function Appbar() {
 
   return (
     <div className="row bg-primary h-100">
-      <div className="col-2 p-2">
-        // TODO: use drawer icon
+      <div className="col-2 p-2 text-start">
+        {/* TODO: use drawer icon */}
         <button
-          className="btn btn-sm btn-outline-light w-100"
+          className="btn btn-sm btn-outline-light bg-light"
           onClick={toggleSidebar}
         >
-          toggle-sidebar
+          <img src={NavDrawer} alt="nav-drawer" />
         </button>
       </div>
     </div>
