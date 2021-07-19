@@ -13,7 +13,6 @@ export default function Modal({ children, showModal, setShowModal }) {
           <span className="close" onClick={() => setShowModal(false)}>
             &times;
           </span>
-          <p className="w-75 mx-auto text-center display-5">Admin Login</p>
 
           {children}
         </div>

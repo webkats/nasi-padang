@@ -39,11 +39,11 @@ export default function BranchDetail() {
             <Link to="/">
               <h5>back to home</h5>
             </Link>
-            {isLoggedIn ? (
+            {isLoggedIn && (
               <Link to={`/branches/${BranchId}/edit-menu`}>
                 <h5>add and remove menu</h5>
               </Link>
-            ) : null}
+            )}
           </div>
         </div>
         <div className="row g-2">

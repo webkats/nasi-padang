@@ -9,6 +9,7 @@ const client = new QoreClient({
   ...config,
   getToken: () => cookies.get("token"),
 });
+
 client.init(schema);
 
 const qoreContext = createQoreContext(client);

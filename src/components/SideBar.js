@@ -4,34 +4,35 @@ import AdminLoginForm from "./AdminLoginForm";
 import GlobalContext from "../context/globalContext";
 import { setLogin } from "../context/globalActions";
 import useFetchTable from "../hooks/useFetchTable";
-import { useHistory } from "react-router-dom";
-
+import AdminPanel from "./AdminPanel";
+import CityFilter from "./CityFilter";
+import useQoreAuthenticationHttps from "../hooks/useQoreAuthenticationHttps";
 // import "../assets/css/sidebar.css";
 
 export default function SideBar() {
-  const history = useHistory();
-
   const [showModal, setShowModal] = useState(false);
   const [state, dispatch] = useContext(GlobalContext);
   const { isLoggedIn } = state;
 
   const [cities, status] = useFetchTable("allCity", {});
 
-  const handleLogout = () => {
-    localStorage.isLoggedIn = false;
-    dispatch(setLogin(false));
+  const { handleLogout } = useQoreAuthenticationHttps(dispatch, setLogin);
+
+  const handleLoginForm = () => {
+    // FIXME:
+    setShowModal(true);
   };
 
   return (
     <div
       id="desktopSidebar"
-      className="col-2 vh-100 position-fixed py-3 bg-dark text-light"
+      className="col-2 vh-100 position-fixed py-3 bg-dark text-light overflow-auto"
     >
       <div>
         {!isLoggedIn ? (
           <button
             className="btn btn-primary w-100 p-2"
-            onClick={() => setShowModal(true)}
+            onClick={handleLoginForm}
           >
             Admin Login
           </button>
@@ -51,34 +52,9 @@ export default function SideBar() {
         </Modal>
       </div>
 
-      {status === "success" ? (
-        <div className="my-3">
-          <p className="fw-bold">Filter by city:</p>
-          <div className="card">
-            <ul className="list-group list-group-flush">
-              <li
-                type="button"
-                className="list-group-item"
-                onClick={() => history.push("/")}
-              >
-                All
-              </li>
-              {cities.map((city) => {
-                return (
-                  <li
-                    key={city.id}
-                    type="button"
-                    className="list-group-item"
-                    onClick={() => history.push(`/${city.name}`)}
-                  >
-                    {city.name}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </div>
-      ) : null}
+      {isLoggedIn && <AdminPanel />}
+
+      {status === "success" && <CityFilter cities={cities} />}
     </div>
   );
 }

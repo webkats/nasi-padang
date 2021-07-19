@@ -2,6 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import GlobalContext from "./globalContext";
 import reducer from "./globalReducer";
 import { setLogin } from "./globalActions";
+import cookies from "js-cookie";
 
 export default function GlobalState({ children }) {
   const initialState = {
@@ -13,7 +14,7 @@ export default function GlobalState({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    if (localStorage.isLoggedIn === "true") dispatch(setLogin(true));
+    if (cookies.get("token")) dispatch(setLogin(true));
   }, []);
 
   return (

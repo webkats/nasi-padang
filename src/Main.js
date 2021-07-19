@@ -8,15 +8,16 @@ export default function useMainContent() {
   const [{ isShowSidebar }, dispatch] = useContext(GlobalContext);
 
   useEffect(() => {
+    if (window.innerWidth < 768) dispatch(setShowSidebar(false));
     window.addEventListener("resize", () => {
-      dispatch(setShowSidebar(window.innerWidth < 576 ? false : true));
+      dispatch(setShowSidebar(window.innerWidth < 768 ? false : true));
     });
     // eslint-disable-next-line
   }, []);
 
   return (
     <div className="row">
-      {isShowSidebar ? <SideBar /> : null}
+      {isShowSidebar && <SideBar />}
       <div
         className={`my-3 px-5 ${isShowSidebar ? "col-10 offset-2" : "col-12"}`}
       >

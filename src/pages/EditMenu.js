@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
-// import useFetchRow from "../hooks/useFetchRow";
+import useFetchRow from "../hooks/useFetchRow";
 import useFetchTable from "../hooks/useFetchTable";
 import useEditRelation from "../hooks/useEditRelation";
 import useFetchRelationships from "../hooks/useFetchRelationships";
@@ -9,8 +9,8 @@ import useFetchRelationships from "../hooks/useFetchRelationships";
 export default function EditMenu() {
   const { BranchId } = useParams();
 
-  // const [branch, branchStatus] = useFetchRow("allBranch", BranchId);
   const [menus, menuStatus] = useFetchTable("allMenu", {});
+  const [branch, branchStatus] = useFetchRow("allBranch", BranchId);
 
   const [branchMenus] = useFetchRelationships(
     "allBranch",
@@ -69,10 +69,22 @@ export default function EditMenu() {
     setListedItems([...listedItems.filter((item) => item.id !== menu.id)]);
   };
 
-  if (branchMenus && menuStatus === "success") {
+  if (branchMenus && menuStatus === "success" && branchStatus === "success") {
+    const { name } = branch;
+    const { displayField: city } = branch.city;
     return (
       <>
-        <div className="row my-2">
+        <div className="row my-2 mb-3">
+          <div className="col-12">
+            <h3>
+              {name}, {city}
+            </h3>
+          </div>
+          <div className="col-12">
+            <Link to={`/`}>
+              <h5>back to home</h5>
+            </Link>
+          </div>
           <div className="col-12">
             <Link to={`/branches/${BranchId}`}>
               <h5>back to branch detail</h5>

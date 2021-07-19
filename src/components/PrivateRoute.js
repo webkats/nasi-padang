@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, useHistory } from "react-router-dom";
+import cookies from "js-cookie";
 
 export default function PrivateRoute({ children, path }) {
   const history = useHistory();
@@ -9,7 +10,7 @@ export default function PrivateRoute({ children, path }) {
       path={path}
       render={() => {
         // TODO: change if use real authentication
-        if (localStorage.isLoggedIn === "false") history.push("/");
+        if (!cookies.get("token")) history.push("/");
         else return children;
       }}
     />

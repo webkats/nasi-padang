@@ -3,14 +3,16 @@ import React, { useContext, useState } from "react";
 
 import GlobalContext from "../context/globalContext";
 import { setLogin } from "../context/globalActions";
+import useQoreAuthenticationHttps from "../hooks/useQoreAuthenticationHttps";
 
 export default function AdminLoginForm({ setShowModal }) {
-  // const { handleLogin } = useQoreAuthentication();
+  // const { handleLogin, client } = useQoreAuthentication();
   const [, dispatch] = useContext(GlobalContext);
+  const { handleLogin } = useQoreAuthenticationHttps(dispatch, setLogin);
 
   const [input, setInput] = useState({
     email: "",
-    pasword: "",
+    password: "",
   });
 
   const handleInputChange = (event) => {
@@ -21,21 +23,25 @@ export default function AdminLoginForm({ setShowModal }) {
     });
   };
 
-  // FIXME:
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
+    // FIXME:
     event.preventDefault();
-    // handleLogin(input.email, input.password);
-    localStorage.isLoggedIn = true;
-    dispatch(setLogin(true));
+    handleLogin(input);
+    // handleLogin(email, password);
+
     setShowModal(false);
+
+    // dispatch(setLogin(true));
+    // localStorage.isLoggedIn = true;
   };
 
   return (
     <form className="w-75 mx-auto" onSubmit={handleSubmit}>
+      <p className="w-75 mx-auto text-center display-6">Admin Login</p>
       <div className="mb-3">
         <label className="form-label">Email address</label>
         <input
-          type="email"
+          type="email" // FIXME:
           name="email"
           className="form-control"
           onChange={handleInputChange}
@@ -44,7 +50,7 @@ export default function AdminLoginForm({ setShowModal }) {
       <div className="mb-3">
         <label className="form-label">Password</label>
         <input
-          type="password"
+          type="password" // FIXME:
           name="password"
           className="form-control"
           onChange={handleInputChange}
