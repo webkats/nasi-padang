@@ -3,6 +3,8 @@ import useFetchTable from "../hooks/useFetchTable";
 import BranchCard from "../components/BranchCard";
 import HomeLayout from "../components/HomeLayout";
 
+// TODO: REFETCH CONTEXT
+
 export default function Home() {
   const [branches, status] = useFetchTable("allBranch", {});
 
