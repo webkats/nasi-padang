@@ -5,16 +5,18 @@ export default function useEditRelation(slug, RowId) {
     .view(slug)
     .useRelation(RowId);
 
-  const handleAddRelation = async (rowName, TargetId) => {
+  const handleAddRelation = async (colName, TargetId) => {
+    // console.log(colName, TargetId);
+    console.log(RowId, "<<< row id di handler");
     await addRelation({
-      [rowName]: [TargetId],
+      [colName]: [TargetId],
       // links: links.map((link) => link.id),
     });
   };
 
-  const handleRemoveRelation = async (rowName, TargetId) => {
+  const handleRemoveRelation = async (colName, TargetId) => {
     await removeRelation({
-      [rowName]: [TargetId],
+      [colName]: [TargetId],
     });
   };
 

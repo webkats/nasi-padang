@@ -13,7 +13,7 @@ export default function useQoreAuthentication() {
     try {
       console.log(email);
       console.log(password);
-      console.log(client.authenticate);
+      // console.log(client.authenticate);
       const token = await client.authenticate(email, password);
       console.log(token, "<<< token");
 

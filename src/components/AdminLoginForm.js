@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
-// import useQoreAuthentication from "../hooks/useQoreAuthentication";
 
 import GlobalContext from "../context/globalContext";
 import { setLogin } from "../context/globalActions";
+// import useQoreAuthentication from "../hooks/useQoreAuthentication";
 import useQoreAuthenticationHttps from "../hooks/useQoreAuthenticationHttps";
 
 export default function AdminLoginForm({ setShowModal }) {

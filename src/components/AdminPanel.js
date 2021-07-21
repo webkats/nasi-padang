@@ -16,17 +16,13 @@ export default function AdminPanel() {
         <div className="card my-2">
           <ul className="list-group lismodalContent-group-flush">
             <li className="list-group-item text-center fw-bold">Admin Panel</li>
-            {/* TODO: ADD ROWS */}
             <AdminPanelItem text="Add new menu" modalContent="AddMenu" />
-            <AdminPanelItem
-              text="Add new branch"
-              modalContent={"Add new branch"}
-            />
-            <AdminPanelItem text="Add new city" modalContent={"Add new city"} />
+            <AdminPanelItem text="Add new branch" modalContent={"AddBranch"} />
+            <AdminPanelItem text="Add new city" modalContent={"AddCity"} />
             {/* TODO: EDIT/DELETE ROWS */}
-            <AdminPanelItem text="Edit/Delete menu" modalContent={"123"} />
+            {/* <AdminPanelItem text="Edit/Delete menu" modalContent={"123"} />
             <AdminPanelItem text="Edit/Delete branch" modalContent={"123"} />
-            <AdminPanelItem text="Edit/Delete city" modalContent={"123"} />
+            <AdminPanelItem text="Edit/Delete city" modalContent={"123"} /> */}
           </ul>
         </div>
 
