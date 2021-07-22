@@ -69,9 +69,16 @@ export default function EditMenu() {
     setListedItems([...listedItems.filter((item) => item.id !== menu.id)]);
   };
 
-  if (branchMenus && menuStatus === "success" && branchStatus === "success") {
+  if (
+    branchMenus &&
+    menuStatus === "success" &&
+    branchStatus === "success" &&
+    branch.city
+  ) {
+    // console.log(branch);
     const { name } = branch;
     const { displayField: city } = branch.city;
+
     return (
       <>
         <div className="row my-2 mb-3">

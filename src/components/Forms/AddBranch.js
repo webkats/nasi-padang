@@ -3,8 +3,12 @@ import useInsertRow from "../../hooks/useInsertRow";
 import AdminPanelContext from "../../context/AdminPanelContext";
 import useFetchTable from "../../hooks/useFetchTable";
 import useCreateRelation from "../../hooks/useCreateRelation";
+import DataContext from "../../context/dataContext";
+import { useHistory } from "react-router-dom";
 
 export default function AddBranch() {
+  const history = useHistory();
+
   const [input, setInput] = useState({
     name: "",
     city: "",
@@ -14,6 +18,8 @@ export default function AddBranch() {
 
   const [cities, status] = useFetchTable("allCity", {});
   const [createRelation] = useCreateRelation();
+
+  const [, revalidateBranches] = useContext(DataContext).branchesState;
 
   useEffect(() => {
     if (status === "success") {
@@ -47,7 +53,10 @@ export default function AddBranch() {
       RowRef: targetCity.id,
     });
 
+    await revalidateBranches();
+
     setShowModal(false);
+    history.push(`/branches/${result.id}/edit-menu`);
   };
 
   if (status === "success")

@@ -3,18 +3,21 @@ import Modal from "./Modal";
 import AdminLoginForm from "./AdminLoginForm";
 import GlobalContext from "../context/globalContext";
 import { setLogin } from "../context/globalActions";
-import useFetchTable from "../hooks/useFetchTable";
+// import useFetchTable from "../hooks/useFetchTable";
 import AdminPanel from "./AdminPanel";
 import CityFilter from "./CityFilter";
 import useQoreAuthenticationHttps from "../hooks/useQoreAuthenticationHttps";
 // import "../assets/css/sidebar.css";
+
+import DataContext from "../context/dataContext";
 
 export default function SideBar() {
   const [showModal, setShowModal] = useState(false);
   const [state, dispatch] = useContext(GlobalContext);
   const { isLoggedIn } = state;
 
-  const [cities, status] = useFetchTable("allCity", {});
+  // const [cities, status] = useFetchTable("allCity", {});
+  const [cities] = useContext(DataContext).citiesState;
 
   const { handleLogout } = useQoreAuthenticationHttps(dispatch, setLogin);
 
@@ -54,7 +57,9 @@ export default function SideBar() {
 
       {isLoggedIn && <AdminPanel />}
 
-      {status === "success" && <CityFilter cities={cities} />}
+      {/* {status === "success" && <CityFilter cities={cities} />}
+       */}
+      <CityFilter cities={cities} />
     </div>
   );
 }
